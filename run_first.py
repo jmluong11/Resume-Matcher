@@ -1,21 +1,20 @@
-import json
-import logging
 import os
+import logging
 
-from scripts import JobDescriptionProcessor, ResumeProcessor
-from scripts.utils import get_filenames_from_dir, init_logging_config
+logging.basicConfig(level=logging.INFO)
 
-init_logging_config()
+# Define the path
+resumes_path = "Data/Resumes"
 
-PROCESSED_RESUMES_PATH = "Data/Processed/Resumes"
-PROCESSED_JOB_DESCRIPTIONS_PATH = "Data/Processed/JobDescription"
+# Print the current working directory
+logging.info("Current working directory: %s", os.getcwd())
 
-
-def read_json(filename):
-    with open(filename) as f:
-        data = json.load(f)
-    return data
-
+# Print the contents of the directory for debugging
+if os.path.exists(resumes_path):
+    files = os.listdir(resumes_path)
+    logging.info("Files in directory: %s", files)
+else:
+    logging.error("The directory %s does not exist.", resumes_path)
 
 def remove_old_files(files_path):
 
